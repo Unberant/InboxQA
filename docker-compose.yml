@@ -1,0 +1,21 @@
+services:
+  
+  backend:
+    build:
+      context: .
+      dockerfile: src/backend/Dockerfile
+    container_name: inbox-qa-backend
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"
+
+  frontend:
+    build:
+      context: .
+      dockerfile: src/frontend/Dockerfile
+    container_name: inbox-qa-frontend
+    depends_on:
+      - backend
+    ports:
+      - "5173:5173"
